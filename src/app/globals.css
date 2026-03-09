@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Custom Properties ─────────────────────────────────── */
+:root {
+  --accent:        #0EA5E9;
+  --accent-dim:    #0369A1;
+  --accent-bright: #38BDF8;
+  --accent-rgb:    14, 165, 233;
+  --bg-deep:       #060B14;
+  --bg-page:       #09101E;
+  --bg-card:       #0F1828;
+  --bg-card-hover: #142034;
+  --text-primary:  #D8E8F8;
+  --text-secondary:#8AA0BC;
+  --text-muted:    #4A6278;
+  --border:        rgba(91, 155, 213, 0.16);
+  --border-hover:  rgba(91, 155, 213, 0.38);
+  --glow:          rgba(91, 155, 213, 0.4);
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-rajdhani), sans-serif;
+  overflow-x: hidden;
+  /* Default cursor is kept — cat follows but does NOT replace it */
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ─── Selection ─────────────────────────────────────────── */
+::selection {
+  background: rgba(91, 155, 213, 0.35);
+  color: #fff;
+}
+
+/* ─── Scanlines ─────────────────────────────────────────── */
+.scanlines-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.025) 2px,
+    rgba(0, 0, 0, 0.025) 4px
+  );
+}
+
+/* ─── Text glows ────────────────────────────────────────── */
+.text-glow-red {
+  text-shadow:
+    0 0 12px rgba(var(--accent-rgb), 0.8),
+    0 0 30px rgba(var(--accent-rgb), 0.4),
+    0 0 60px rgba(var(--accent-rgb), 0.15);
+}
+.text-glow-silver {
+  text-shadow:
+    0 0 12px rgba(200, 218, 240, 0.7),
+    0 0 30px rgba(200, 218, 240, 0.3);
+}
+.text-glow-white {
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Border glows ──────────────────────────────────────── */
+.border-glow-red {
+  box-shadow:
+    0 0 10px rgba(var(--accent-rgb), 0.35),
+    0 0 20px rgba(var(--accent-rgb), 0.15),
+    inset 0 0 10px rgba(var(--accent-rgb), 0.07);
+}
+
+/* ─── Glass Card ────────────────────────────────────────── */
+.glass-card {
+  background: rgba(15, 24, 40, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+/* ─── Chrome / Metallic Text ────────────────────────────── */
+.text-chrome {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #c8daf0 30%,
+    #38bdf8 55%,
+    #c8daf0 75%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Animated underline ────────────────────────────────── */
+.animated-underline { position: relative; }
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+  box-shadow: 0 0 8px var(--glow);
+}
+.animated-underline:hover::after { width: 100%; }
+
+/* ─── Badge hover ───────────────────────────────────────── */
+.badge-hover {
+  transition: all 0.3s ease;
+}
+.badge-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.35);
+  border-color: rgba(var(--accent-rgb), 0.55);
+  color: #fff;
+}
+
+/* ─── Audio button ──────────────────────────────────────── */
+.audio-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+/* ─── Canvas ────────────────────────────────────────────── */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Flame flicker animations ──────────────────────────── */
+@keyframes flicker-sm {
+  0%, 100% { transform: scaleX(1)    scaleY(1)    rotate(0deg); }
+  40%       { transform: scaleX(0.97) scaleY(1.04) rotate(-0.5deg); }
+  70%       { transform: scaleX(1.02) scaleY(0.97) rotate(0.4deg); }
+}
+@keyframes flicker-md {
+  0%, 100% { transform: scaleX(1)    scaleY(1)    rotate(0deg); }
+  25%       { transform: scaleX(0.95) scaleY(1.05) rotate(-1deg); }
+  50%       { transform: scaleX(1.04) scaleY(0.95) rotate(0.7deg); }
+  75%       { transform: scaleX(0.97) scaleY(1.02) rotate(-0.4deg); }
+}
+@keyframes flicker-lg {
+  0%, 100% { transform: scaleX(1)    scaleY(1)    rotate(0deg); }
+  20%       { transform: scaleX(0.93) scaleY(1.07) rotate(-1.2deg); }
+  40%       { transform: scaleX(1.05) scaleY(0.94) rotate(1deg); }
+  60%       { transform: scaleX(0.96) scaleY(1.04) rotate(-0.6deg); }
+  80%       { transform: scaleX(1.03) scaleY(0.97) rotate(0.5deg); }
+}
+
+.flame-sm { animation: flicker-sm 1.9s  ease-in-out infinite; transform-origin: bottom center; }
+.flame-md { animation: flicker-md 1.2s  ease-in-out infinite; transform-origin: bottom center; }
+.flame-lg { animation: flicker-lg 0.72s ease-in-out infinite; transform-origin: bottom center; }
+
+/* ─── Spark (Learning level) ────────────────────────────────*/
+@keyframes spark {
+  0%   { opacity: 0.55; transform: scale(0.82) rotate(-8deg); }
+  18%  { opacity: 1;    transform: scale(1.18) rotate(4deg);  }
+  35%  { opacity: 0.68; transform: scale(0.88) rotate(-4deg); }
+  52%  { opacity: 1;    transform: scale(1.12) rotate(6deg);  }
+  70%  { opacity: 0.60; transform: scale(0.85) rotate(-6deg); }
+  88%  { opacity: 1;    transform: scale(1.15) rotate(3deg);  }
+  100% { opacity: 0.55; transform: scale(0.82) rotate(-8deg); }
+}
+.flame-spark {
+  animation: spark 0.88s ease-in-out infinite;
+  transform-origin: center;
+}
