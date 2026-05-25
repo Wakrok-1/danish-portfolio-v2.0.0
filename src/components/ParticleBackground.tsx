@@ -30,14 +30,14 @@ export default function ParticleBackground() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const COUNT = 70;
+    const COUNT = 75;
     particleRef.current = Array.from({ length: COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.28,
       vy: (Math.random() - 0.5) * 0.28,
-      radius: Math.random() * 1.4 + 0.4,
-      opacity: Math.random() * 0.25 + 0.05,
+      radius: Math.random() * 1.6 + 0.5,
+      opacity: Math.random() * 0.35 + 0.08,
       pulse: Math.random() * Math.PI * 2,
       pulseSpeed: Math.random() * 0.015 + 0.003,
     }));
@@ -58,13 +58,13 @@ export default function ParticleBackground() {
           const dx = ps[i].x - ps[j].x;
           const dy = ps[i].y - ps[j].y;
           const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d < 100) {
-            const a = (1 - d / 100) * 0.05;
+          if (d < 110) {
+            const a = (1 - d / 110) * 0.09;
             ctx.beginPath();
             ctx.moveTo(ps[i].x, ps[i].y);
             ctx.lineTo(ps[j].x, ps[j].y);
-            ctx.strokeStyle = `rgba(129,140,248,${a})`;
-            ctx.lineWidth   = 0.4;
+            ctx.strokeStyle = `rgba(167,139,250,${a})`;
+            ctx.lineWidth   = 0.5;
             ctx.stroke();
           }
         }
@@ -96,7 +96,7 @@ export default function ParticleBackground() {
         // Core dot — indigo/white neutral
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(165,180,252,${alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(196,181,253,${alpha.toFixed(3)})`;
         ctx.fill();
       });
 

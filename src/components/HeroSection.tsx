@@ -49,11 +49,11 @@ export default function HeroSection() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.7 }}
         >
-          <div className="h-px w-10" style={{ background: "var(--accent)" }} />
-          <span className="font-mono text-[10px] tracking-[0.22em] uppercase" style={{ color: "var(--accent)" }}>
+          <div className="h-px w-10" style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(167,139,250,0.6)" }} />
+          <span className="font-mono text-[10px] tracking-[0.22em] uppercase glow-sm" style={{ color: "var(--accent)" }}>
             Portfolio
           </span>
-          <div className="h-px w-10" style={{ background: "var(--accent)" }} />
+          <div className="h-px w-10" style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(167,139,250,0.6)" }} />
         </motion.div>
 
         {/* Name — DANISH */}
@@ -72,12 +72,12 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* RAIMI — accent color */}
+          {/* RAIMI — accent color with glow */}
           <div className="flex items-center justify-center gap-[2px] sm:gap-1">
             {NAME_LAST.map((letter, i) => (
               <motion.span
                 key={i}
-                className="text-[clamp(3.5rem,12vw,9rem)] inline-block"
+                className="text-[clamp(3.5rem,12vw,9rem)] inline-block glow-text"
                 style={{ color: "var(--accent)" }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ export default function HeroSection() {
           transition={{ delay: 1.1, duration: 0.5 }}
         >
           <div className="h-px w-20 sm:w-32" style={{ background: "var(--border-hover)" }} />
-          <div className="w-1 h-1 rounded-full" style={{ background: "var(--accent)" }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(167,139,250,0.9), 0 0 16px rgba(167,139,250,0.5)" }} />
           <div className="h-px w-20 sm:w-32" style={{ background: "var(--border-hover)" }} />
         </motion.div>
 
@@ -131,9 +131,10 @@ export default function HeroSection() {
             href="#projects"
             className="group relative font-body font-medium text-sm px-7 py-3 overflow-hidden transition-all duration-300 cursor-pointer"
             style={{
-              border: "1px solid var(--accent)",
+              border: "1px solid rgba(167,139,250,0.6)",
               color: "var(--accent)",
               borderRadius: "6px",
+              boxShadow: "0 0 18px rgba(167,139,250,0.18), inset 0 0 18px rgba(167,139,250,0.04)",
             }}
           >
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"

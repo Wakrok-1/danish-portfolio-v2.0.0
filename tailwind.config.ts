@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg:        "#0A0A0A",
-        surface:   "#111111",
-        "surface-2": "#1A1A1A",
-        accent:    "#818CF8",
-        "accent-dim":    "#6366F1",
-        "accent-bright": "#A5B4FC",
+        bg:          "#050505",
+        surface:     "#0F0F0F",
+        "surface-2": "#191919",
+        accent:      "#A78BFA",
+        "accent-dim":    "#7C6DD8",
+        "accent-bright": "#C4B5FD",
       },
       fontFamily: {
         heading: ["var(--font-heading)", "system-ui", "sans-serif"],
