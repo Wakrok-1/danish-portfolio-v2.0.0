@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import VoidBackground from "./VoidBackground";
 
 interface Domain {
   id: string;
@@ -55,7 +56,7 @@ const DOMAINS: Domain[] = [
     id: "frontend",
     title: "Frontend Development",
     subtitle: "Building interfaces people love",
-    color: "#818CF8",
+    color: "#A78BFA",
     icon: <FrontendIcon />,
     description:
       "Crafting responsive, performant web interfaces with modern frameworks. I focus on clean component architecture, smooth animations, and pixel-perfect design implementation.",
@@ -65,7 +66,7 @@ const DOMAINS: Domain[] = [
     id: "backend",
     title: "Backend Development",
     subtitle: "Powering reliable server systems",
-    color: "#818CF8",
+    color: "#A78BFA",
     icon: <BackendIcon />,
     description:
       "Designing scalable server-side systems and REST APIs. I build reliable backends with Python and Node.js, focusing on clean architecture and efficient data handling.",
@@ -75,7 +76,7 @@ const DOMAINS: Domain[] = [
     id: "datascience",
     title: "Data Science & ML",
     subtitle: "Turning raw data into insight",
-    color: "#818CF8",
+    color: "#A78BFA",
     icon: <DataIcon />,
     description:
       "Turning raw data into actionable knowledge. From exploratory analysis to building and deploying machine learning models, I work across the full data pipeline.",
@@ -85,7 +86,7 @@ const DOMAINS: Domain[] = [
     id: "nlp",
     title: "NLP & AI Engineering",
     subtitle: "Teaching machines language",
-    color: "#818CF8",
+    color: "#A78BFA",
     icon: <NLPIcon />,
     description:
       "Working with transformer-based models and language understanding pipelines. Exploring how machines read, understand, and generate human language.",
@@ -188,18 +189,22 @@ export default function WhatIDo() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section id="whatido" className="relative py-28 px-4" style={{ background: "var(--surface)" }}>
-      {/* Subtle grid */}
+    <section id="whatido" className="relative py-28 px-4 overflow-hidden" style={{ background: "var(--surface)" }}>
+      {/* Infinite Void ambient background */}
+      <VoidBackground />
+
+      {/* Subtle grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
+        className="absolute inset-0 opacity-[0.012] pointer-events-none"
         style={{
           backgroundImage: "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
+          zIndex: 1,
         }}
         aria-hidden="true"
       />
 
-      <div ref={ref} className="relative z-10 max-w-3xl mx-auto">
+      <div ref={ref} className="relative max-w-3xl mx-auto" style={{ zIndex: 2 }}>
         {/* Header */}
         <div className="text-center mb-16">
           <motion.span
